@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    padding: 15px;
+    font-family: "Nunito", sans-serif;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(137, 247, 255);
+}
+
+
+header {
+    display: flex;
+    text-align: center;
+    padding: 25px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#simbología{
+    list-style: none;
+}
+
+.tarjetas {
+    flex-direction: column;
+    padding: 20px 20px 20px 50px;
+    border-color: black;
+    box-shadow: 1px 1px 2px 0px;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: rgb(255, 255, 255);
+
+}
+
+.lecciones{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(250, 183, 38);
+    font-size: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: darkgrey;
+}
+
+li{
+    padding: 7px;
+    text-decoration: none;
+}
