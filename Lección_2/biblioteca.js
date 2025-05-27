@@ -39,9 +39,10 @@ function agregarLibro(titulo, autor, genero, disponible) {
         biblioteca.libros.push(nuevoLibro);
         escribirDatos(() => {
             console.log(`Libro "${titulo}" agregado exitosamente.`);
-            
+            setTimeout(() => {
+                mostrarLibros(); // Mostrar los libros
+            })
         })
-        // Pista: deberías agregar el nuevo libro a `biblioteca.libros`
     }, 1000);
 }
 
@@ -53,15 +54,14 @@ function actualizarDisponibilidad(titulo, nuevoEstado) {
         if(libro){
             libro.disponible = nuevoEstado;
             escribirDatos(() => {
-                console.log(`Disponibilidad del libro "${titulo} actualizada`);
+                console.log(`Disponibilidad del libro "${titulo}" actualizada`);
                 
             })
         }
         else{
-            console.log(`Libro con título "${titulo} no encontrado`);
+            console.log(`Libro con título "${titulo}" no encontrado`);
             
         }
-        // Pista: busca el libro por título y cambia la propiedad 'disponible' a nuevoEstado
     }, 1000);
 }
 
