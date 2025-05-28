@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Rick and Morty</title>
+</head>
+<body>
+    <h1>🧪 Personajes de Rick and Morty</h1>
+
+    <!-- Petición a la API -->
+    <h1>Información de Personajes</h1>
+    
+    <div id="request-method">
+        <button id="fetch-btn">Obtener con Fetch</button>
+        <button id="axios-btn">Obtener con Axios</button>
+    </div>
+
+
+    <!-- Pagination -->
+    <div id="pagination">
+        <button id="prev">Anterior</button>
+        <button id="next">Siguiente</button>
+    </div>
+
+
+
+    <!-- Contenedor de personajes -->
+    <section id="characters-container"></section>
+    
+    <script src="main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+</html>
