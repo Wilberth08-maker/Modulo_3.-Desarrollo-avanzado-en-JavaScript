@@ -17,20 +17,7 @@
             <div class="list-header">
                 <h2> Por hacer </h2>
             </div>
-            <div class="cards-container" id="pendiente">
-                <div class="card"> 
-                    <div class="text-card">
-                    </div>
-                    <div class="card-actions">
-                        <button class="edit-card-btn">
-                            Editar
-                        </button>
-                        <button class="delete-card-btn">
-                            Borrar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div class="cards-container" id="pendiente"></div>
             <div class="add-card">
                 <button class="add-card-btn"> + Añadir tarea </button>
             </div>
@@ -39,20 +26,7 @@
             <div class="list-header">
                 <h2> En progreso </h2>
             </div>
-            <div class="cards-container" id="en-progreso">
-                <div class="card"> 
-                    <div class="text-card">
-                    </div>
-                    <div class="card-actions">
-                        <button class="edit-card-btn">
-                            Editar
-                        </button>
-                        <button class="delete-card-btn">
-                            Borrar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div class="cards-container" id="enprogreso"></div>
             <div class="add-card">
                 <button class="add-card-btn"> + Añadir tarea </button>
             </div>
@@ -61,24 +35,39 @@
             <div class="list-header">
                 <h2> Hecho </h2>
             </div>
-            <div class="cards-container" id="terminada">
-                <div class="card"> 
-                    <div class="text-card">
-                    </div>
-                    <div class="card-actions">
-                        <button class="edit-card-btn">
-                            Editar
-                        </button>
-                        <button class="delete-card-btn">
-                            Borrar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div class="cards-container" id="terminada"></div>
             <div class="add-card">
                 <button class="add-card-btn"> + Añadir tarea </button>
             </div>
         </div>
+    </div>
+
+    <!-- Formulario oculto -->
+    <div id="form-modal" style="display: none;" class="form-modal">
+        <form id="formulario-tarea" class="formulario-tarea">
+            <input type="hidden" id="tarea-id">
+    
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" required>
+    
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" required>
+    
+            <label for="responsable">Responsable:</label>
+            <input type="text" id="responsable" required>
+    
+            <label for="estado">Estado:</label>
+            <select id="estado">
+                <option value="pendiente">Por hacer</option>
+                <option value="enprogreso">En progreso</option>
+                <option value="terminada">Hecho</option>
+            </select>
+    
+            <div class="form-botones">
+                <button type="submit">Guardar</button>
+                <button type="button" id="cancelar-btn">Cancelar</button>
+            </div>
+        </form>
     </div>
 
     <script src="app.js"></script>
