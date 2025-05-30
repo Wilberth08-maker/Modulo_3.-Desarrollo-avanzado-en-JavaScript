@@ -87,7 +87,7 @@ async function getCharactersAxios(page = 1) {
     }
 }
 
-// Crear una función es renderizar un array de personajes en el contenedor HTML
+// Crear una función para renderizar un array de tareas en el contenedor HTML
 // Crea tarjetas visuales para cada personaje con su infomarción en el contenedor
 function renderCharacters(characters) {
     // Limpiar el contenedor antes de insertar los nuevos personajes

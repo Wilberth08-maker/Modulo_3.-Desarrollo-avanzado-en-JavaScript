@@ -25,7 +25,6 @@ async function getTareas() {
     try{
         const response = await fetch(API_URL); // hacer una solicitud/petición GET a la API
         const tareas = await response.json(); // convertir la respuesta a JSON
-        console.log(tareas);
         renderTareasPorEstado(tareas); // llamar a la función para renderizar los productos 
     }catch(error){
         showError('Error al obtener las tareas: ' + error.message) // Muestra un mensaje de error si ocurre un error al cargar las tareas
@@ -89,7 +88,6 @@ function crearElementoTarea(tarea){
 // Funciones de edición y eliminación
 async function actualizarTarea(id){
     try{
-        console.log("Intentando acceder a la tarea con ID:", id);
         const response = await fetch(`${API_URL}/${id}`);
         if (!response.ok) throw new Error(`Status: ${response.status}`);
         const tarea = await response.json();
@@ -106,12 +104,11 @@ async function actualizarTarea(id){
 
 async function eliminarTarea(id) {
     try{
-        console.log("Intentando acceder a la tarea con ID:", id);
         const response = await fetch(`${API_URL}/${id}`,{method: "DELETE",});
         // Manejo de error en la respuesta del servidor
         if(!response.ok) throw new Error(`Status: ${response.status}`); // Si la respuesta no es OK, lanzar un error
-        // si la respuesta es correcta, actualizar la lista de productos
-        await getTareas(); // recargar la lista de productos después de eliminar el producto
+        // si la respuesta es correcta, actualizar las cards
+        await getTareas(); // recargar las tareas después de eliminar el producto
     }catch(error){
         showError('Error al eliminar el producto: ' + error.message); // Mostrar un mensaje de error si ocurre un error al eliminar el producto
     }
@@ -179,26 +176,6 @@ document.querySelectorAll(".add-card-btn").forEach((btn, index) => {
         modal.style.display = "flex";
     });
 });
-
-async function crearTareaDummy() {
-    const tarea = {
-        id: 100,
-        titulo: "Dummy",
-        descripcion: "Dummy description",
-        responsable: "Tú",
-        estado: "pendiente"
-    };
-
-    await fetch(`${API_URL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(tarea)
-    });
-
-    getTareas();
-}
-
-
 
 
 // Iniciar la app
