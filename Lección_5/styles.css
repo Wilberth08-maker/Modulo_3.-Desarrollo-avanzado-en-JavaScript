@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1{
+    text-align: center;
+    padding: 1rem;
+}
+body{
+    padding: 1rem;
+    background-color: rgb(220, 255, 253);
+}
+form {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(240, 241, 241);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+select,
+button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
