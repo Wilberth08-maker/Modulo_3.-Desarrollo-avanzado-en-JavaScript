@@ -73,6 +73,13 @@ function crearElementoTarea(tarea){
     const card = document.createElement("div");
     card.className = "card"; // añadir la calse "card" al div
     // Define el contenido HTML de la tarjeta con los datos de la tarea
+
+    card.setAttribute("draggable", true); // Hace que la tarjeta se pueda arrastrar
+
+    card.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", tarea.id);
+    });
+
     card.innerHTML = ` 
         <div class="text-card">
             <h2>${tarea.id}. ${tarea.titulo}</h2>
@@ -223,6 +230,41 @@ avatarOptions.forEach(input => {
         avatarOptions.forEach(i => i.parentElement.classList.remove('selected'));
         if (input.checked) {
             input.parentElement.classList.add('selected');
+        }
+    });
+});
+
+// EXTRA. TARJETAS DESPLAZABLES
+
+Object.keys(containers).forEach(estadoKey => {
+    const contenedor = containers[estadoKey];
+
+    contenedor.addEventListener("dragover", (e) => {
+        e.preventDefault(); // Permite soltar
+    });
+
+    contenedor.addEventListener("drop", async (e) => {
+        e.preventDefault();
+        const tareaId = e.dataTransfer.getData("text/plain");
+
+        // Obtener la tarea actual
+        const response = await fetch(`${API_URL}/${tareaId}`);
+        const tarea = await response.json();
+
+        // Actualizar el estado de la tarea al nuevo estado
+        const nuevoEstado = estadoKey;
+
+        // Solo actualizar si el estado cambió
+        if (tarea.estado.toLowerCase().replace(" ", "") !== nuevoEstado) {
+            tarea.estado = nuevoEstado;
+
+            await fetch(`${API_URL}/${tareaId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(tarea)
+            });
+
+            getTareas(); // Recarga las tareas
         }
     });
 });
