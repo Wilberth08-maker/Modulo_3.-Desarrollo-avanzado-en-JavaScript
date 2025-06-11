@@ -15,7 +15,8 @@
     <div class="board-container">
         <div class="list">
             <div class="list-header">
-                <h2> Por hacer </h2>
+                <h2> Por hacer</h2>
+                <span id="contador-pendiente">0</span>
             </div>
             <div class="cards-container" id="pendiente"></div>
             <div class="add-card">
@@ -25,6 +26,7 @@
         <div class="list">
             <div class="list-header">
                 <h2> En progreso </h2>
+                <span id="contador-enprogreso">0</span>
             </div>
             <div class="cards-container" id="enprogreso"></div>
             <div class="add-card">
@@ -33,7 +35,8 @@
         </div>            
         <div class="list">
             <div class="list-header">
-                <h2> Hecho </h2>
+                <h2> Hecho</h2>
+                <span id="contador-terminada">0</span>
             </div>
             <div class="cards-container" id="terminada"></div>
             <div class="add-card">
@@ -55,6 +58,70 @@
     
             <label for="responsable">Responsable:</label>
             <input type="text" id="responsable" required>
+
+            <label>Elige un avatar:</label>
+            <div id="avatar-container" class="avatar-container">
+                <div class="avatar-option" data-avatar="images/avatar_1.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_1.jpg" id="avatar1" hidden>
+                    <label for="avatar1">
+                        <img src="images/avatar_1.jpg" alt="Avatar 1">
+                    </label>                    
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_2.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_2.jpg" id="avatar2" hidden>
+                    <label for="avatar2">
+                        <img src="images/avatar_2.jpg" alt="Avatar 2">
+                    </label> 
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_3.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_3.jpg" id="avatar3" hidden>
+                    <label for="avatar3">
+                        <img src="images/avatar_3.jpg" alt="Avatar 3">
+                    </label>    
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_4.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_4.jpg" id="avatar4" hidden>
+                    <label for="avatar4">
+                        <img src="images/avatar_4.jpg" alt="Avatar 4">
+                    </label>                    
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_5.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_5.jpg" id="avatar5" hidden>
+                    <label for="avatar5">
+                        <img src="images/avatar_5.jpg" alt="Avatar 5">
+                    </label>                     
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_6.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_6.jpg" id="avatar6" hidden>
+                    <label for="avatar6">
+                        <img src="images/avatar_6.jpg" alt="Avatar 6">
+                    </label>                     
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_7.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_7.jpg" id="avatar7" hidden>
+                    <label for="avatar7">
+                        <img src="images/avatar_7.jpg" alt="Avatar 7">
+                    </label>
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_8.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_8.jpg" id="avatar8" hidden>
+                    <label for="avatar8">
+                        <img src="images/avatar_8.jpg" alt="Avatar 8">
+                    </label>                    
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_9.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_9.jpg" id="avatar9" hidden>
+                    <label for="avatar9">
+                        <img src="images/avatar_9.jpg" alt="Avatar 9">
+                    </label>                     
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar_10.jpg">
+                    <input type="radio" name="avatar" value="images/avatar_10.jpg" id="avatar10" hidden>
+                    <label for="avatar10">
+                        <img src="images/avatar_10.jpg" alt="Avatar 10">
+                    </label>                     
+                </div>
+            </div>
     
             <label for="estado">Estado:</label>
             <select id="estado">

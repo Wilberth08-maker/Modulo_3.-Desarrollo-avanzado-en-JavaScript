@@ -1,5 +1,5 @@
 // URL DE LA API REST DONDE SE ALMACENAN LOS PRODUCTOS
-const API_URL = 'http://localhost:3000/tareas'; // URL de la API REST
+const API_URL = 'https://api-project-mm6l.onrender.com/tareas'; // URL de la API REST
 
 // MANIPULAR EL DOM
 // Seleccionar los elemnetos del dom
@@ -19,12 +19,14 @@ const inputDescripcion = document.getElementById("descripcion");
 const inputResponsable = document.getElementById("responsable");
 const inputEstado = document.getElementById("estado");
 const cancelarBtn = document.getElementById("cancelar-btn");
+const inputAvatar = document.querySelector('input[name="avatar"]:checked') || { value: '' };
 
 // Función para obtener las tareas desede el servidor y mostrarlo en las cartas
 async function getTareas() {
     try{
         const response = await fetch(API_URL); // hacer una solicitud/petición GET a la API
         const tareas = await response.json(); // convertir la respuesta a JSON
+        
         renderTareasPorEstado(tareas); // llamar a la función para renderizar los productos 
     }catch(error){
         showError('Error al obtener las tareas: ' + error.message) // Muestra un mensaje de error si ocurre un error al cargar las tareas
@@ -37,6 +39,13 @@ function showError(mensaje) {
 
 //Función para mostrar las tareas
 function renderTareasPorEstado(tareas){
+
+    const contadores = {
+        pendiente: 0,
+        enprogreso: 0,
+        terminada: 0,
+    };
+
     // limpiar el contenedor
     for(const estado in containers){
         containers[estado].innerHTML = "";
@@ -44,12 +53,19 @@ function renderTareasPorEstado(tareas){
 
     tareas.forEach(tarea => {
         let estadoKey = tarea.estado.toLowerCase().replace(" ", "");
+        contadores[estadoKey]++;
         const card = crearElementoTarea(tarea);
         const contenedor = containers[estadoKey];
         if (contenedor) {
             contenedor.appendChild(card);
         }
     });
+
+    // Contadores de tareas por estado
+    document.getElementById("contador-pendiente").textContent = contadores.pendiente;
+    document.getElementById("contador-enprogreso").textContent = contadores.enprogreso;
+    document.getElementById("contador-terminada").textContent = contadores.terminada;
+
 }
 
 function crearElementoTarea(tarea){
@@ -62,7 +78,10 @@ function crearElementoTarea(tarea){
             <h2>${tarea.id}. ${tarea.titulo}</h2>
         </div>
         <div class="text-card"> ${tarea.descripcion} </div>
-        <div class="text-card"><strong>Responsable:</strong> ${tarea.responsable || "N/A"}</div>
+        <div class="responsable-info">
+        <strong>Responsable:</strong>${tarea.responsable || "N/A"}
+        <img src="${tarea.avatar || 'default-avatar.png'}" class="avatar-small" /> 
+        </div>
         <div class="card-actions">
             <button class="edit-card-btn" data-id="${tarea.id}">
                 Editar
@@ -96,6 +115,21 @@ async function actualizarTarea(id){
         inputDescripcion.value = tarea.descripcion;
         inputEstado.value = tarea.estado.toLowerCase().replace(" ", "");
         inputResponsable.value = tarea.responsable || "";
+
+        
+        const avatarOptions = document.querySelectorAll('.avatar-option input[name="avatar"]');
+
+        avatarOptions.forEach(input => {
+            input.checked = false;
+            input.parentElement.classList.remove('selected');
+        });
+
+        const avatarToSelect = Array.from(avatarOptions).find(input => input.value === tarea.avatar);
+        if (avatarToSelect) {
+            avatarToSelect.checked = true;
+            avatarToSelect.parentElement.classList.add('selected');
+        }
+
         modal.style.display = "flex";
     }catch(error){
         showError("Error al cargar tarea: " + error.message);
@@ -103,6 +137,9 @@ async function actualizarTarea(id){
 }
 
 async function eliminarTarea(id) {
+    const confirmar = confirm("¿Estás seguro de que deseas eliminar esta tarea?");
+    if (!confirmar) return;
+
     try{
         const response = await fetch(`${API_URL}/${id}`,{method: "DELETE",});
         // Manejo de error en la respuesta del servidor
@@ -125,11 +162,13 @@ cancelarBtn.addEventListener("click", () => {
 formulario.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const selectedAvatar = document.querySelector('input[name="avatar"]:checked');
     const tarea = {
         titulo: inputTitulo.value.trim(),
         descripcion: inputDescripcion.value.trim(),
         responsable: inputResponsable.value.trim(),
-        estado: inputEstado.value.trim()
+        estado: inputEstado.value.trim(),
+        avatar: selectedAvatar ? selectedAvatar.value : ""
     };
 
     const id = inputId.value;
@@ -177,6 +216,16 @@ document.querySelectorAll(".add-card-btn").forEach((btn, index) => {
     });
 });
 
+const avatarOptions = document.querySelectorAll('.avatar-option input[name="avatar"]');
+
+avatarOptions.forEach(input => {
+    input.addEventListener('change', () => {
+        avatarOptions.forEach(i => i.parentElement.classList.remove('selected'));
+        if (input.checked) {
+            input.parentElement.classList.add('selected');
+        }
+    });
+});
 
 // Iniciar la app
 getTareas();
