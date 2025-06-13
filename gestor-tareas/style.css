@@ -14,7 +14,7 @@ body {
 
 .board-header{
     background-color: #2c3e50;
-    color: #ecf0f1;
+    color: white;
     padding: 1rem 1rem;
     text-align: center;
     box-shadow: rgba(134, 47, 105, 0.25) 0px 2px 5px -1px, rgba(71, 67, 67, 0.3) 0px 1px 3px -1px;
