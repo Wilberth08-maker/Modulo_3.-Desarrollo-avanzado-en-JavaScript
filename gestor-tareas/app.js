@@ -22,6 +22,10 @@ const cancelarBtn = document.getElementById("cancelar-btn");
 const inputAvatar = document.querySelector('input[name="avatar"]:checked') || { value: '' };
 const inputFecha = document.getElementById("inputFecha");
 const inputPrioridad = document.getElementById("prioridad");
+const filtroPrioridad = document.getElementById("filtroPrioridad");
+const filtroResponsable = document.getElementById("filtroResponsable");
+const btnFiltrar = document.getElementById("btn-filtrar");
+const btnLimpiar = document.getElementById("btn-limpiar");
 
 // Función para obtener las tareas desede el servidor y mostrarlo en las cartas
 async function getTareas() {
@@ -30,8 +34,10 @@ async function getTareas() {
         const tareas = await response.json(); // convertir la respuesta a JSON
         
         renderTareasPorEstado(tareas); // llamar a la función para renderizar los productos 
+        return tareas;
     }catch(error){
         showError('Error al obtener las tareas: ' + error.message) // Muestra un mensaje de error si ocurre un error al cargar las tareas
+        return[];
     }
 }
 
@@ -138,6 +144,7 @@ async function actualizarTarea(id){
         inputDescripcion.value = tarea.descripcion;
         inputEstado.value = tarea.estado.toLowerCase().replace(" ", "");
         inputResponsable.value = tarea.responsable || "";
+        inputPrioridad.value = tarea.prioridad || "media";
 
         
         const avatarOptions = document.querySelectorAll('.avatar-option input[name="avatar"]');
@@ -192,7 +199,8 @@ formulario.addEventListener("submit", async (e) => {
         responsable: inputResponsable.value.trim(),
         estado: inputEstado.value.trim(),
         avatar: selectedAvatar ? selectedAvatar.value : "",
-        fecha: inputFecha.value
+        fecha: inputFecha.value,
+        prioridad: inputPrioridad.value.trim()
     };
 
     const id = inputId.value;
@@ -228,6 +236,7 @@ function limpiarFormulario() {
     inputResponsable.value = "";
     inputEstado.value = "pendiente";
     inputFecha.value = "";
+    inputPrioridad.value = "media";
 }
 
 // Botones de "Añadir tarea"
@@ -285,6 +294,53 @@ Object.keys(containers).forEach(estadoKey => {
             getTareas(); // Recarga las tareas
         }
     });
+});
+
+async function aplicarFiltros() {
+    const filtroPorPrioridad = filtroPrioridad.value.trim().toLowerCase();
+    const filtroPorResponsable = filtroResponsable.value.trim().toLowerCase();
+
+    const response = await fetch(API_URL); 
+    const tareas = await response.json();
+
+
+    const tareasFiltradas = tareas.filter(tarea => {
+
+        const prioridadTarea = (tarea.prioridad || "").toLowerCase();
+
+        const responsableTarea = (tarea.responsable || "").toLowerCase();
+
+        const cumplePrioridad = !filtroPorPrioridad || prioridadTarea === filtroPorPrioridad;
+        const cumpleResponsable = !filtroPorResponsable || responsableTarea.includes(filtroPorResponsable);
+        return cumplePrioridad && cumpleResponsable;
+    });
+
+    if (tareasFiltradas.length === 0) {
+        const hayPrioridad = filtroPorPrioridad !== "";
+        const hayResponsable = filtroPorResponsable !== "";
+
+        let mensaje = "No se encontraron tareas";
+
+        if (hayPrioridad && hayResponsable) {
+            mensaje += ` con prioridad "${filtroPorPrioridad}" y responsable que incluya a "${filtroPorResponsable}"`;
+        } else if (hayPrioridad) {
+            mensaje += ` con prioridad "${filtroPorPrioridad}"`;
+        } else if (hayResponsable) {
+            mensaje += ` con responsable que incluya a"${filtroPorResponsable}"`;
+        }
+
+        alert(mensaje);
+        return;
+    }
+
+    renderTareasPorEstado(tareasFiltradas);
+}
+
+btnFiltrar.addEventListener("click", aplicarFiltros);
+btnLimpiar.addEventListener("click", () => {
+    filtroPrioridad.value = "";
+    filtroResponsable.value = "";
+    aplicarFiltros();
 });
 
 // Iniciar la app

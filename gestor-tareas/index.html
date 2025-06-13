@@ -11,18 +11,24 @@
     <header class="board-header">
         <h1> Mi tablero Trewo</h1>
     </header>
-    
+
     <div class="filtros">
-        <label for="filtroPrioridad">Filtrar por prioridad:</label>
-        <select id="filtroPrioridad">
-            <option value="">Todas</option>
-            <option value="Alta">Alta</option>
-            <option value="Media">Media</option>
-            <option value="Baja">Baja</option>
-        </select>
+        <label for="filtroPrioridad">Filtrar por prioridad:
+            <select id="filtroPrioridad">
+                <option value="">Todas</option>
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+            </select>
+        </label>
     
-        <label for="filtroResponsable">Filtrar por responsable:</label>
-        <input type="text" id="filtroResponsable" placeholder="Nombre del responsable" />
+        <label for="filtroResponsable">Filtrar por responsable:
+            <input type="text" id="filtroResponsable" placeholder="Nombre del responsable" />
+        </label>        
+
+        <button id="btn-filtrar">Filtrar</button>
+        <button id="btn-limpiar">Limpiar filtros</button>
+
     </div>
 
     <div class="board-container">
