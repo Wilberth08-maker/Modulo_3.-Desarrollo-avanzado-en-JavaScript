@@ -144,6 +144,7 @@ async function actualizarTarea(id){
         inputDescripcion.value = tarea.descripcion;
         inputEstado.value = tarea.estado.toLowerCase().replace(" ", "");
         inputResponsable.value = tarea.responsable || "";
+        inputFecha.value = tarea.fecha ? tarea.fecha.slice(0, 10) : "";
         inputPrioridad.value = tarea.prioridad || "media";
 
         
