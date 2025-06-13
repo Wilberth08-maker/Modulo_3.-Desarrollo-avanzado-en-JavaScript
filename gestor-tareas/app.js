@@ -20,6 +20,8 @@ const inputResponsable = document.getElementById("responsable");
 const inputEstado = document.getElementById("estado");
 const cancelarBtn = document.getElementById("cancelar-btn");
 const inputAvatar = document.querySelector('input[name="avatar"]:checked') || { value: '' };
+const inputFecha = document.getElementById("inputFecha");
+const inputPrioridad = document.getElementById("prioridad");
 
 // Función para obtener las tareas desede el servidor y mostrarlo en las cartas
 async function getTareas() {
@@ -80,6 +82,15 @@ function crearElementoTarea(tarea){
         e.dataTransfer.setData("text/plain", tarea.id);
     });
 
+    // Prioridad
+    const prioridadColor = {
+        alta: 'red',
+        media: 'orange',
+        baja: 'green'
+        };
+    
+    const color = prioridadColor[tarea.prioridad] || 'gray';
+
     card.innerHTML = ` 
         <div class="text-card">
             <h2>${tarea.id}. ${tarea.titulo}</h2>
@@ -88,6 +99,11 @@ function crearElementoTarea(tarea){
         <div class="responsable-info">
         <strong>Responsable:</strong>${tarea.responsable || "N/A"}
         <img src="${tarea.avatar || 'default-avatar.png'}" class="avatar-small" /> 
+        </div>
+        <div class="text-card">📅 ${tarea.fecha || "Sin fecha"}</div>
+        <div class="text-card">
+            <strong>Prioridad:</strong> 
+            <span style="color:${color}; font-weight:bold;">${tarea.prioridad || "Sin priroridad"}</span>
         </div>
         <div class="card-actions">
             <button class="edit-card-btn" data-id="${tarea.id}">
@@ -175,7 +191,8 @@ formulario.addEventListener("submit", async (e) => {
         descripcion: inputDescripcion.value.trim(),
         responsable: inputResponsable.value.trim(),
         estado: inputEstado.value.trim(),
-        avatar: selectedAvatar ? selectedAvatar.value : ""
+        avatar: selectedAvatar ? selectedAvatar.value : "",
+        fecha: inputFecha.value
     };
 
     const id = inputId.value;
@@ -210,6 +227,7 @@ function limpiarFormulario() {
     inputDescripcion.value = "";
     inputResponsable.value = "";
     inputEstado.value = "pendiente";
+    inputFecha.value = "";
 }
 
 // Botones de "Añadir tarea"

@@ -11,6 +11,19 @@
     <header class="board-header">
         <h1> Mi tablero Trewo</h1>
     </header>
+    
+    <div class="filtros">
+        <label for="filtroPrioridad">Filtrar por prioridad:</label>
+        <select id="filtroPrioridad">
+            <option value="">Todas</option>
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+        </select>
+    
+        <label for="filtroResponsable">Filtrar por responsable:</label>
+        <input type="text" id="filtroResponsable" placeholder="Nombre del responsable" />
+    </div>
 
     <div class="board-container">
         <div class="list">
@@ -122,12 +135,22 @@
                     </label>                     
                 </div>
             </div>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="inputFecha" name="fecha">
     
             <label for="estado">Estado:</label>
             <select id="estado">
                 <option value="pendiente">Por hacer</option>
                 <option value="enprogreso">En progreso</option>
                 <option value="terminada">Hecho</option>
+            </select>
+
+            <label for="prioridad">Prioridad:</label>
+            <select id="prioridad" name="prioridad" required>
+                <option value="alta">Alta 🔴</option>
+                <option value="media">Media 🟠</option>
+                <option value="baja">Baja 🟢</option>
             </select>
     
             <div class="form-botones">
