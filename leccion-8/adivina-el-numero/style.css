@@ -1,0 +1,91 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.contenedor {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90vw;           
+    max-width: 25rem;      
+    text-align: center;
+    margin: 2rem;
+    gap: 1rem;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #555;
+    margin: 10px 0;
+}
+
+#numero {
+    padding: 0.5rem;
+    width: 80vw;
+    max-width: 20rem; 
+    margin: 1rem auto;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+}
+
+button {
+    padding: 0.6rem 1.2rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 6rem;
+}
+
+#mensaje {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#adivinar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#reiniciar {
+    background-color: #f44336;
+    color: white;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+
+@keyframes parpadeo {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+}
+
+.mensaje-animado {
+    animation: parpadeo 0.3s ease-in-out;
+    font-weight: bold;
+    color: #333;
+}
