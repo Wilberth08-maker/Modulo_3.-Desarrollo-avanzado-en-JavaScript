@@ -8,5 +8,5 @@
 ## ACTIVIDAD LECCIÓN 4: Martes 13 de marzo del 2025
 ## ACTIVIDAD LECCIÓN 5: Jueves 15 de mayo del 2025
 ## ACTIVIDAD LECCIÓN 6: Martes 20 de mayo del 2025
-## ACTIVIDAD LECCIÓN 7: Martes 08 de abril del 2025
-## ACTIVIDAD LECCIÓN 8: Jueves 10 de abril del 2025
+## ACTIVIDAD LECCIÓN 7: Martes 27 de mayo del 2025
+## ACTIVIDAD LECCIÓN 8: Jueves 29 de mayo del 2025
